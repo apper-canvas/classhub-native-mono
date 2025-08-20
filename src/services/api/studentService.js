@@ -87,14 +87,14 @@ fields: [
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
 records: [{
-          first_name_c: studentData.firstName || studentData.first_name_c,
-          last_name_c: studentData.lastName || studentData.last_name_c,
-          email_c: studentData.email || studentData.email_c,
-          student_id_c: studentData.studentId || studentData.student_id_c,
-          grade_c: studentData.grade || studentData.grade_c,
-          photo_url_c: `https://api.dicebear.com/7.x/initials/svg?seed=${(studentData.firstName || studentData.first_name_c)}${(studentData.lastName || studentData.last_name_c)}`,
+          FirstName_c: studentData.firstName || studentData.FirstName_c,
+          LastName_c: studentData.lastName || studentData.LastName_c,
+          Email_c: studentData.email || studentData.Email_c,
+          StudentId_c: studentData.studentId || studentData.StudentId_c,
+          GradeLevel_c: studentData.grade || studentData.GradeLevel_c,
+          PhotoUrl_c: `https://api.dicebear.com/7.x/initials/svg?seed=${(studentData.firstName || studentData.FirstName_c)}${(studentData.lastName || studentData.LastName_c)}`,
           marks_c: parseFloat(studentData.marks) || 0
         }]
       };
@@ -142,14 +142,14 @@ records: [{
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         records: [{
 Id: id,
-          first_name_c: studentData.firstName || studentData.first_name_c,
-          last_name_c: studentData.lastName || studentData.last_name_c,
-          email_c: studentData.email || studentData.email_c,
-          student_id_c: studentData.studentId || studentData.student_id_c,
-          grade_c: studentData.grade || studentData.grade_c,
+          FirstName_c: studentData.firstName || studentData.FirstName_c,
+          LastName_c: studentData.lastName || studentData.LastName_c,
+          Email_c: studentData.email || studentData.Email_c,
+          StudentId_c: studentData.studentId || studentData.StudentId_c,
+          GradeLevel_c: studentData.grade || studentData.GradeLevel_c,
           marks_c: parseFloat(studentData.marks) || 0
         }]
       };
