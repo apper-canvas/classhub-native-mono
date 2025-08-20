@@ -1,0 +1,107 @@
+[
+  {
+    "Id": 1,
+    "studentId": 1,
+    "assignmentId": 1,
+    "score": 22,
+    "submittedDate": "2024-01-15T10:30:00.000Z"
+  },
+  {
+    "Id": 2,
+    "studentId": 2,
+    "assignmentId": 1,
+    "score": 20,
+    "submittedDate": "2024-01-15T11:15:00.000Z"
+  },
+  {
+    "Id": 3,
+    "studentId": 3,
+    "assignmentId": 1,
+    "score": 25,
+    "submittedDate": "2024-01-15T09:45:00.000Z"
+  },
+  {
+    "Id": 4,
+    "studentId": 4,
+    "assignmentId": 1,
+    "score": 18,
+    "submittedDate": "2024-01-15T12:20:00.000Z"
+  },
+  {
+    "Id": 5,
+    "studentId": 1,
+    "assignmentId": 2,
+    "score": 18,
+    "submittedDate": "2024-01-10T16:30:00.000Z"
+  },
+  {
+    "Id": 6,
+    "studentId": 2,
+    "assignmentId": 2,
+    "score": 15,
+    "submittedDate": "2024-01-10T17:45:00.000Z"
+  },
+  {
+    "Id": 7,
+    "studentId": 3,
+    "assignmentId": 2,
+    "score": 20,
+    "submittedDate": "2024-01-10T14:20:00.000Z"
+  },
+  {
+    "Id": 8,
+    "studentId": 5,
+    "assignmentId": 1,
+    "score": 23,
+    "submittedDate": "2024-01-15T13:10:00.000Z"
+  },
+  {
+    "Id": 9,
+    "studentId": 6,
+    "assignmentId": 1,
+    "score": 21,
+    "submittedDate": "2024-01-15T14:25:00.000Z"
+  },
+  {
+    "Id": 10,
+    "studentId": 7,
+    "assignmentId": 1,
+    "score": 24,
+    "submittedDate": "2024-01-15T08:30:00.000Z"
+  },
+  {
+    "Id": 11,
+    "studentId": 8,
+    "assignmentId": 2,
+    "score": 17,
+    "submittedDate": "2024-01-10T19:15:00.000Z"
+  },
+  {
+    "Id": 12,
+    "studentId": 9,
+    "assignmentId": 2,
+    "score": 19,
+    "submittedDate": "2024-01-10T18:40:00.000Z"
+  },
+  {
+    "Id": 13,
+    "studentId": 10,
+    "assignmentId": 1,
+    "score": 19,
+    "submittedDate": "2024-01-15T15:50:00.000Z"
+  },
+  {
+    "Id": 14,
+    "studentId": 11,
+    "assignmentId": 2,
+    "score": 18,
+    "submittedDate": "2024-01-10T20:30:00.000Z"
+  },
+  {
+    "Id": 15,
+    "studentId": 12,
+    "assignmentId": 1,
+    "score": 16,
+    "submittedDate": "2024-01-15T16:45:00.000Z"
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "Id": 1,
+    "firstName": "Emma",
+    "lastName": "Johnson",
+    "email": "emma.johnson@school.edu",
+    "studentId": "STU001",
+    "grade": "10",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=EmmaJohnson"
+  },
+  {
+    "Id": 2,
+    "firstName": "Liam",
+    "lastName": "Smith",
+    "email": "liam.smith@school.edu",
+    "studentId": "STU002",
+    "grade": "10",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=LiamSmith"
+  },
+  {
+    "Id": 3,
+    "firstName": "Olivia",
+    "lastName": "Davis",
+    "email": "olivia.davis@school.edu",
+    "studentId": "STU003",
+    "grade": "11",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=OliviaDavis"
+  },
+  {
+    "Id": 4,
+    "firstName": "Noah",
+    "lastName": "Wilson",
+    "email": "noah.wilson@school.edu",
+    "studentId": "STU004",
+    "grade": "10",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=NoahWilson"
+  },
+  {
+    "Id": 5,
+    "firstName": "Ava",
+    "lastName": "Brown",
+    "email": "ava.brown@school.edu",
+    "studentId": "STU005",
+    "grade": "11",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=AvaBrown"
+  },
+  {
+    "Id": 6,
+    "firstName": "William",
+    "lastName": "Taylor",
+    "email": "william.taylor@school.edu",
+    "studentId": "STU006",
+    "grade": "10",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=WilliamTaylor"
+  },
+  {
+    "Id": 7,
+    "firstName": "Sophia",
+    "lastName": "Anderson",
+    "email": "sophia.anderson@school.edu",
+    "studentId": "STU007",
+    "grade": "11",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=SophiaAnderson"
+  },
+  {
+    "Id": 8,
+    "firstName": "James",
+    "lastName": "Thomas",
+    "email": "james.thomas@school.edu",
+    "studentId": "STU008",
+    "grade": "10",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=JamesThomas"
+  },
+  {
+    "Id": 9,
+    "firstName": "Isabella",
+    "lastName": "Jackson",
+    "email": "isabella.jackson@school.edu",
+    "studentId": "STU009",
+    "grade": "11",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=IsabellaJackson"
+  },
+  {
+    "Id": 10,
+    "firstName": "Benjamin",
+    "lastName": "White",
+    "email": "benjamin.white@school.edu",
+    "studentId": "STU010",
+    "grade": "10",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=BenjaminWhite"
+  },
+  {
+    "Id": 11,
+    "firstName": "Charlotte",
+    "lastName": "Harris",
+    "email": "charlotte.harris@school.edu",
+    "studentId": "STU011",
+    "grade": "11",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=CharlotteHarris"
+  },
+  {
+    "Id": 12,
+    "firstName": "Lucas",
+    "lastName": "Martin",
+    "email": "lucas.martin@school.edu",
+    "studentId": "STU012",
+    "grade": "10",
+    "photoUrl": "https://api.dicebear.com/7.x/initials/svg?seed=LucasMartin"
+  }
+]
