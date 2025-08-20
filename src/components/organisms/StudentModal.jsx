@@ -16,11 +16,11 @@ const [formData, setFormData] = useState({
 useEffect(() => {
     if (student) {
       setFormData({
-        firstName: student.first_name_c || "",
-        lastName: student.last_name_c || "",
-        email: student.email_c || "",
-        studentId: student.student_id_c || "",
-        grade: student.grade_c || "",
+        firstName: student.FirstName_c || "",
+        lastName: student.LastName_c || "",
+        email: student.Email_c || "",
+        studentId: student.StudentId_c || "",
+        grade: student.GradeLevel_c || "",
         marks: student.marks_c || ""
       });
     } else {

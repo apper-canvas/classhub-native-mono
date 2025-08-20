@@ -77,14 +77,14 @@ const StudentTable = ({ students, onEdit, onDelete }) => {
                     </div>
                   </div>
                 </td>
-                <td className="px-6 py-4">
-                  <span className="font-mono text-sm text-gray-600">{student.studentId}</span>
+<td className="px-6 py-4">
+                  <span className="font-mono text-sm text-gray-600">{student.StudentId_c}</span>
                 </td>
                 <td className="px-6 py-4">
-                  <Badge variant="primary">{student.grade}</Badge>
+                  <Badge variant="primary">{student.GradeLevel_c}</Badge>
                 </td>
                 <td className="px-6 py-4">
-                  <span className="text-gray-600">{student.email}</span>
+                  <span className="text-gray-600">{student.Email_c}</span>
                 </td>
                 <td className="px-6 py-4 text-right">
                   <div className="flex items-center justify-end gap-2">
