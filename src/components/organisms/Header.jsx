@@ -31,7 +31,7 @@ const Header = ({ onMenuClick, currentPath }) => {
           </h1>
         </div>
 
-        <div className="flex items-center gap-4">
+<div className="flex items-center gap-4">
           <SearchBar 
             placeholder="Search students, assignments..."
             className="hidden sm:block w-80"
@@ -41,6 +41,21 @@ const Header = ({ onMenuClick, currentPath }) => {
             <Button variant="ghost" size="sm" className="relative">
               <ApperIcon name="Bell" className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full"></span>
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={() => {
+                const { ApperUI } = window.ApperSDK;
+                ApperUI.logout().then(() => {
+                  window.location.href = '/login';
+                }).catch(console.error);
+              }}
+              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+            >
+              <ApperIcon name="LogOut" className="h-4 w-4 mr-1" />
+              Logout
             </Button>
             
             <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center">

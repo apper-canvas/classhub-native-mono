@@ -10,11 +10,11 @@ const AttendanceGrid = ({ students, attendance, currentWeek, onAttendanceUpdate 
   }).filter(day => day.getDay() !== 0 && day.getDay() !== 6); // Exclude weekends
 
   const getAttendanceStatus = (studentId, date) => {
-    const record = attendance.find(
-      a => a.studentId === studentId && 
-      format(new Date(a.date), "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
+const record = attendance.find(
+      a => a.Student_c?.Id === studentId && 
+      format(new Date(a.Date_c), "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
     );
-    return record?.status || "";
+    return record?.Status_c || "";
   };
 
   const cycleAttendanceStatus = (currentStatus) => {
@@ -59,32 +59,32 @@ const AttendanceGrid = ({ students, attendance, currentWeek, onAttendanceUpdate 
           </thead>
           <tbody className="divide-y divide-gray-200">
             {students.map((student) => (
-              <tr key={student.Id} className="hover:bg-gray-50 transition-colors duration-150">
-                <td className="px-6 py-4 sticky left-0 bg-white border-r">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                      {student.firstName[0]}{student.lastName[0]}
+<tr key={student.Id} className="hover:bg-gray-50 transition-colors duration-150">
+              <td className="px-6 py-4 sticky left-0 bg-white border-r">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                    {student.FirstName_c?.[0]}{student.LastName_c?.[0]}
+                  </div>
+                  <div className="ml-4">
+                    <div className="font-medium text-gray-900">
+                      {student.FirstName_c} {student.LastName_c}
                     </div>
-                    <div className="ml-4">
-                      <div className="font-medium text-gray-900">
-                        {student.firstName} {student.lastName}
-                      </div>
-                      <div className="text-sm text-gray-500">{student.studentId}</div>
+                    <div className="text-sm text-gray-500">{student.StudentId_c}</div>
                     </div>
                   </div>
                 </td>
-                {weekDays.map((day) => {
-                  const status = getAttendanceStatus(student.Id, day);
-                  return (
-                    <td key={day.toISOString()} className="px-4 py-4 text-center">
-                      <AttendanceCell
-                        status={status}
-                        onClick={() => handleStatusUpdate(student.Id, day, status)}
-                        studentName={`${student.firstName} ${student.lastName}`}
-                        date={format(day, "MMM d")}
-                      />
-                    </td>
-                  );
+{weekDays.map((day) => {
+                const status = getAttendanceStatus(student.Id, day);
+                return (
+                  <td key={day.toISOString()} className="px-4 py-4 text-center">
+                    <AttendanceCell
+                      status={status}
+                      onClick={() => handleStatusUpdate(student.Id, day, status)}
+                      studentName={`${student.FirstName_c} ${student.LastName_c}`}
+                      date={format(day, "MMM d")}
+                    />
+                  </td>
+                );
                 })}
               </tr>
             ))}

@@ -48,11 +48,11 @@ const Grades = () => {
     loadGradesData();
   }, []);
 
-  const filteredAssignments = selectedCategory === "all" 
+const filteredAssignments = selectedCategory === "all" 
     ? assignments 
-    : assignments.filter(a => a.category === selectedCategory);
+    : assignments.filter(a => a.Category_c === selectedCategory);
 
-  const categories = [...new Set(assignments.map(a => a.category))];
+  const categories = [...new Set(assignments.map(a => a.Category_c))];
 
   const handleAddAssignment = () => {
     setEditingAssignment(null);
@@ -64,16 +64,20 @@ const Grades = () => {
     setShowModal(true);
   };
 
-  const handleSaveAssignment = async (assignmentData) => {
+const handleSaveAssignment = async (assignmentData) => {
     try {
       if (editingAssignment) {
         const updated = await assignmentService.update(editingAssignment.Id, assignmentData);
-        setAssignments(assignments.map(a => a.Id === editingAssignment.Id ? updated : a));
-        toast.success("Assignment updated successfully!");
+        if (updated) {
+          setAssignments(assignments.map(a => a.Id === editingAssignment.Id ? updated : a));
+          toast.success("Assignment updated successfully!");
+        }
       } else {
         const newAssignment = await assignmentService.create(assignmentData);
-        setAssignments([...assignments, newAssignment]);
-        toast.success("Assignment added successfully!");
+        if (newAssignment) {
+          setAssignments([...assignments, newAssignment]);
+          toast.success("Assignment added successfully!");
+        }
       }
       setShowModal(false);
     } catch (err) {
@@ -82,27 +86,31 @@ const Grades = () => {
     }
   };
 
-  const handleGradeUpdate = async (studentId, assignmentId, score) => {
+const handleGradeUpdate = async (studentId, assignmentId, score) => {
     try {
       const existingGrade = grades.find(g => 
-        g.studentId === studentId && g.assignmentId === assignmentId
+        g.Student_c?.Id === studentId && g.Assignment_c?.Id === assignmentId
       );
 
       if (existingGrade) {
         const updated = await gradeService.update(existingGrade.Id, {
           ...existingGrade,
-          score,
-          submittedDate: new Date().toISOString()
+          Score_c: score,
+          SubmittedDate_c: new Date().toISOString()
         });
-        setGrades(grades.map(g => g.Id === existingGrade.Id ? updated : g));
+        if (updated) {
+          setGrades(grades.map(g => g.Id === existingGrade.Id ? updated : g));
+        }
       } else {
         const newGrade = await gradeService.create({
-          studentId,
-          assignmentId,
-          score,
-          submittedDate: new Date().toISOString()
+          Student_c: studentId,
+          Assignment_c: assignmentId,
+          Score_c: score,
+          SubmittedDate_c: new Date().toISOString()
         });
-        setGrades([...grades, newGrade]);
+        if (newGrade) {
+          setGrades([...grades, newGrade]);
+        }
       }
       
       toast.success("Grade updated successfully!");

@@ -12,9 +12,15 @@ const StudentModal = ({ isOpen, onClose, onSave, student }) => {
     grade: ""
   });
 
-  useEffect(() => {
+useEffect(() => {
     if (student) {
-      setFormData(student);
+      setFormData({
+        firstName: student.FirstName_c || "",
+        lastName: student.LastName_c || "",
+        email: student.Email_c || "",
+        studentId: student.StudentId_c || "",
+        grade: student.GradeLevel_c || ""
+      });
     } else {
       setFormData({
         firstName: "",

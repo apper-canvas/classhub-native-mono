@@ -41,36 +41,42 @@ const Attendance = () => {
     loadAttendanceData();
   }, []);
 
-  const handleAttendanceUpdate = async (studentId, date, status) => {
+const handleAttendanceUpdate = async (studentId, date, status) => {
     try {
       const dateString = format(date, "yyyy-MM-dd");
       const existingRecord = attendance.find(
-        a => a.studentId === studentId && 
-        format(new Date(a.date), "yyyy-MM-dd") === dateString
+        a => a.Student_c?.Id === studentId && 
+        format(new Date(a.Date_c), "yyyy-MM-dd") === dateString
       );
 
       if (existingRecord) {
         if (status === "") {
           // Delete the record if status is empty
-          await attendanceService.delete(existingRecord.Id);
-          setAttendance(attendance.filter(a => a.Id !== existingRecord.Id));
+          const success = await attendanceService.delete(existingRecord.Id);
+          if (success) {
+            setAttendance(attendance.filter(a => a.Id !== existingRecord.Id));
+          }
         } else {
           // Update existing record
           const updated = await attendanceService.update(existingRecord.Id, {
             ...existingRecord,
-            status
+            Status_c: status
           });
-          setAttendance(attendance.map(a => a.Id === existingRecord.Id ? updated : a));
+          if (updated) {
+            setAttendance(attendance.map(a => a.Id === existingRecord.Id ? updated : a));
+          }
         }
       } else if (status !== "") {
         // Create new record
         const newRecord = await attendanceService.create({
-          studentId,
-          date: date.toISOString(),
-          status,
-          notes: ""
+          Student_c: studentId,
+          Date_c: date.toISOString(),
+          Status_c: status,
+          Notes_c: ""
         });
-        setAttendance([...attendance, newRecord]);
+        if (newRecord) {
+          setAttendance([...attendance, newRecord]);
+        }
       }
       
       toast.success("Attendance updated successfully!");
@@ -190,64 +196,64 @@ const Attendance = () => {
             <div>
               <p className="text-sm text-green-600">Weekly Present</p>
               <p className="font-semibold text-green-800">
-                {attendance.filter(a => {
-                  const attendanceWeek = startOfWeek(new Date(a.date), { weekStartsOn: 1 });
-                  const selectedWeek = startOfWeek(currentWeek, { weekStartsOn: 1 });
-                  return format(attendanceWeek, "yyyy-MM-dd") === format(selectedWeek, "yyyy-MM-dd") && 
-                         a.status === "present";
-                }).length}
-              </p>
-            </div>
+{attendance.filter(a => {
+                const attendanceWeek = startOfWeek(new Date(a.Date_c), { weekStartsOn: 1 });
+                const selectedWeek = startOfWeek(currentWeek, { weekStartsOn: 1 });
+                return format(attendanceWeek, "yyyy-MM-dd") === format(selectedWeek, "yyyy-MM-dd") && 
+                       a.Status_c === "present";
+              }).length}
+            </p>
           </div>
         </div>
-        
-        <div className="bg-gradient-to-r from-red-50 to-red-100 p-4 rounded-lg">
-          <div className="flex items-center">
-            <ApperIcon name="XCircle" className="h-5 w-5 text-red-600 mr-2" />
-            <div>
-              <p className="text-sm text-red-600">Weekly Absent</p>
-              <p className="font-semibold text-red-800">
-                {attendance.filter(a => {
-                  const attendanceWeek = startOfWeek(new Date(a.date), { weekStartsOn: 1 });
-                  const selectedWeek = startOfWeek(currentWeek, { weekStartsOn: 1 });
-                  return format(attendanceWeek, "yyyy-MM-dd") === format(selectedWeek, "yyyy-MM-dd") && 
-                         a.status === "absent";
-                }).length}
-              </p>
-            </div>
+      </div>
+      
+      <div className="bg-gradient-to-r from-red-50 to-red-100 p-4 rounded-lg">
+        <div className="flex items-center">
+          <ApperIcon name="XCircle" className="h-5 w-5 text-red-600 mr-2" />
+          <div>
+            <p className="text-sm text-red-600">Weekly Absent</p>
+            <p className="font-semibold text-red-800">
+              {attendance.filter(a => {
+                const attendanceWeek = startOfWeek(new Date(a.Date_c), { weekStartsOn: 1 });
+                const selectedWeek = startOfWeek(currentWeek, { weekStartsOn: 1 });
+                return format(attendanceWeek, "yyyy-MM-dd") === format(selectedWeek, "yyyy-MM-dd") && 
+                       a.Status_c === "absent";
+              }).length}
+            </p>
           </div>
         </div>
-        
-        <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 p-4 rounded-lg">
-          <div className="flex items-center">
-            <ApperIcon name="Clock" className="h-5 w-5 text-yellow-600 mr-2" />
-            <div>
-              <p className="text-sm text-yellow-600">Weekly Late</p>
-              <p className="font-semibold text-yellow-800">
-                {attendance.filter(a => {
-                  const attendanceWeek = startOfWeek(new Date(a.date), { weekStartsOn: 1 });
-                  const selectedWeek = startOfWeek(currentWeek, { weekStartsOn: 1 });
-                  return format(attendanceWeek, "yyyy-MM-dd") === format(selectedWeek, "yyyy-MM-dd") && 
-                         a.status === "late";
-                }).length}
-              </p>
-            </div>
+      </div>
+      
+      <div className="bg-gradient-to-r from-yellow-50 to-yellow-100 p-4 rounded-lg">
+        <div className="flex items-center">
+          <ApperIcon name="Clock" className="h-5 w-5 text-yellow-600 mr-2" />
+          <div>
+            <p className="text-sm text-yellow-600">Weekly Late</p>
+            <p className="font-semibold text-yellow-800">
+              {attendance.filter(a => {
+                const attendanceWeek = startOfWeek(new Date(a.Date_c), { weekStartsOn: 1 });
+                const selectedWeek = startOfWeek(currentWeek, { weekStartsOn: 1 });
+                return format(attendanceWeek, "yyyy-MM-dd") === format(selectedWeek, "yyyy-MM-dd") && 
+                       a.Status_c === "late";
+              }).length}
+            </p>
           </div>
         </div>
-        
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
-          <div className="flex items-center">
-            <ApperIcon name="Shield" className="h-5 w-5 text-blue-600 mr-2" />
-            <div>
-              <p className="text-sm text-blue-600">Weekly Excused</p>
-              <p className="font-semibold text-blue-800">
-                {attendance.filter(a => {
-                  const attendanceWeek = startOfWeek(new Date(a.date), { weekStartsOn: 1 });
-                  const selectedWeek = startOfWeek(currentWeek, { weekStartsOn: 1 });
-                  return format(attendanceWeek, "yyyy-MM-dd") === format(selectedWeek, "yyyy-MM-dd") && 
-                         a.status === "excused";
-                }).length}
-              </p>
+      </div>
+      
+      <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg">
+        <div className="flex items-center">
+          <ApperIcon name="Shield" className="h-5 w-5 text-blue-600 mr-2" />
+          <div>
+            <p className="text-sm text-blue-600">Weekly Excused</p>
+            <p className="font-semibold text-blue-800">
+              {attendance.filter(a => {
+                const attendanceWeek = startOfWeek(new Date(a.Date_c), { weekStartsOn: 1 });
+                const selectedWeek = startOfWeek(currentWeek, { weekStartsOn: 1 });
+                return format(attendanceWeek, "yyyy-MM-dd") === format(selectedWeek, "yyyy-MM-dd") && 
+                       a.Status_c === "excused";
+              }).length}
+            </p>
             </div>
           </div>
         </div>

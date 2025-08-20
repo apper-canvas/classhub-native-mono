@@ -39,10 +39,10 @@ const Students = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = students.filter(student => 
-      `${student.firstName} ${student.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.studentId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.email.toLowerCase().includes(searchTerm.toLowerCase())
+const filtered = students.filter(student => 
+      `${student.FirstName_c} ${student.LastName_c}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.StudentId_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.Email_c?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredStudents(filtered);
   }, [searchTerm, students]);
@@ -57,16 +57,20 @@ const Students = () => {
     setShowModal(true);
   };
 
-  const handleSaveStudent = async (studentData) => {
+const handleSaveStudent = async (studentData) => {
     try {
       if (editingStudent) {
         const updated = await studentService.update(editingStudent.Id, studentData);
-        setStudents(students.map(s => s.Id === editingStudent.Id ? updated : s));
-        toast.success("Student updated successfully!");
+        if (updated) {
+          setStudents(students.map(s => s.Id === editingStudent.Id ? updated : s));
+          toast.success("Student updated successfully!");
+        }
       } else {
         const newStudent = await studentService.create(studentData);
-        setStudents([...students, newStudent]);
-        toast.success("Student added successfully!");
+        if (newStudent) {
+          setStudents([...students, newStudent]);
+          toast.success("Student added successfully!");
+        }
       }
       setShowModal(false);
     } catch (err) {
@@ -75,12 +79,14 @@ const Students = () => {
     }
   };
 
-  const handleDeleteStudent = async (studentId) => {
+const handleDeleteStudent = async (studentId) => {
     if (window.confirm("Are you sure you want to delete this student?")) {
       try {
-        await studentService.delete(studentId);
-        setStudents(students.filter(s => s.Id !== studentId));
-        toast.success("Student deleted successfully!");
+        const success = await studentService.delete(studentId);
+        if (success) {
+          setStudents(students.filter(s => s.Id !== studentId));
+          toast.success("Student deleted successfully!");
+        }
       } catch (err) {
         toast.error("Failed to delete student");
         console.error(err);

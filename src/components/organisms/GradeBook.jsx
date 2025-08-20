@@ -9,8 +9,8 @@ const GradeBook = ({ students, assignments, grades, onGradeUpdate }) => {
   const [editingCell, setEditingCell] = useState(null);
   const [editValue, setEditValue] = useState("");
 
-  const getGrade = (studentId, assignmentId) => {
-    return grades.find(g => g.studentId === studentId && g.assignmentId === assignmentId);
+const getGrade = (studentId, assignmentId) => {
+    return grades.find(g => g.Student_c?.Id === studentId && g.Assignment_c?.Id === assignmentId);
   };
 
   const handleCellClick = (studentId, assignmentId, currentScore) => {
@@ -44,13 +44,13 @@ const GradeBook = ({ students, assignments, grades, onGradeUpdate }) => {
                 Student
               </th>
               {assignments.map((assignment) => (
-                <th key={assignment.Id} className="px-3 py-3 text-center min-w-[120px]">
-                  <div className="space-y-1">
-                    <div className="font-semibold text-gray-700 text-sm">{assignment.title}</div>
-                    <div className="text-xs text-gray-500">{assignment.points} pts</div>
-                    <div className="text-xs text-gray-500">{assignment.category}</div>
-                  </div>
-                </th>
+<th key={assignment.Id} className="px-3 py-3 text-center min-w-[120px]">
+                <div className="space-y-1">
+                  <div className="font-semibold text-gray-700 text-sm">{assignment.Title_c}</div>
+                  <div className="text-xs text-gray-500">{assignment.Points_c} pts</div>
+                  <div className="text-xs text-gray-500">{assignment.Category_c}</div>
+                </div>
+              </th>
               ))}
               <th className="px-4 py-3 text-center font-semibold text-gray-700">
                 Average
@@ -59,30 +59,30 @@ const GradeBook = ({ students, assignments, grades, onGradeUpdate }) => {
           </thead>
           <tbody className="divide-y divide-gray-200">
             {students.map((student) => {
-              const studentGrades = assignments.map(assignment => {
-                const grade = getGrade(student.Id, assignment.Id);
-                return grade ? grade.score : 0;
-              });
-              
-              const totalPoints = assignments.reduce((sum, assignment) => sum + assignment.points, 0);
-              const earnedPoints = assignments.reduce((sum, assignment) => {
-                const grade = getGrade(student.Id, assignment.Id);
-                return sum + (grade ? grade.score : 0);
-              }, 0);
-              
-              const average = totalPoints > 0 ? (earnedPoints / totalPoints) * 100 : 0;
+const studentGrades = assignments.map(assignment => {
+              const grade = getGrade(student.Id, assignment.Id);
+              return grade ? grade.Score_c : 0;
+            });
+            
+            const totalPoints = assignments.reduce((sum, assignment) => sum + assignment.Points_c, 0);
+            const earnedPoints = assignments.reduce((sum, assignment) => {
+              const grade = getGrade(student.Id, assignment.Id);
+              return sum + (grade ? grade.Score_c : 0);
+            }, 0);
+            
+            const average = totalPoints > 0 ? (earnedPoints / totalPoints) * 100 : 0;
 
               return (
                 <tr key={student.Id} className="hover:bg-gray-50 transition-colors duration-150">
-                  <td className="px-4 py-3 sticky left-0 bg-white border-r">
-                    <div className="flex items-center">
-                      <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
-                        {student.firstName[0]}{student.lastName[0]}
+<td className="px-4 py-3 sticky left-0 bg-white border-r">
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                      {student.FirstName_c?.[0]}{student.LastName_c?.[0]}
+                    </div>
+                    <div className="ml-3">
+                      <div className="font-medium text-gray-900 text-sm">
+                        {student.FirstName_c} {student.LastName_c}
                       </div>
-                      <div className="ml-3">
-                        <div className="font-medium text-gray-900 text-sm">
-                          {student.firstName} {student.lastName}
-                        </div>
                       </div>
                     </div>
                   </td>
@@ -107,14 +107,14 @@ const GradeBook = ({ students, assignments, grades, onGradeUpdate }) => {
                             min={0}
                           />
                         ) : (
-                          <button
-                            onClick={() => handleCellClick(student.Id, assignment.Id, grade?.score)}
-                            className="w-full p-2 rounded hover:bg-gray-100 transition-colors"
-                          >
-                            {grade ? (
-                              <GradePill score={grade.score} maxPoints={assignment.points} />
-                            ) : (
-                              <span className="text-gray-400 text-sm">-</span>
+<button
+                          onClick={() => handleCellClick(student.Id, assignment.Id, grade?.Score_c)}
+                          className="w-full p-2 rounded hover:bg-gray-100 transition-colors"
+                        >
+                          {grade ? (
+                            <GradePill score={grade.Score_c} maxPoints={assignment.Points_c} />
+                          ) : (
+                            <span className="text-gray-400 text-sm">-</span>
                             )}
                           </button>
                         )}

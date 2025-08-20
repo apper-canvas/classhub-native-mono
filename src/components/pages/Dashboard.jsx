@@ -49,34 +49,34 @@ const Dashboard = () => {
   if (loading) return <Loading type="cards" />;
   if (error) return <Error message={error} onRetry={loadDashboardData} />;
 
-  // Calculate statistics
+// Calculate statistics
   const totalStudents = students.length;
   
   const todayAttendance = attendance.filter(a => {
     const today = new Date().toDateString();
-    return new Date(a.date).toDateString() === today;
+    return new Date(a.Date_c).toDateString() === today;
   });
-  const presentToday = todayAttendance.filter(a => a.status === "present").length;
+  const presentToday = todayAttendance.filter(a => a.Status_c === "present").length;
   const attendanceRate = totalStudents > 0 ? ((presentToday / totalStudents) * 100).toFixed(1) : 0;
   
   const totalAssignments = assignments.length;
   const totalGrades = grades.length;
   const averageGrade = totalGrades > 0 ? 
     assignments.reduce((sum, assignment) => {
-      const assignmentGrades = grades.filter(g => g.assignmentId === assignment.Id);
+      const assignmentGrades = grades.filter(g => g.Assignment_c?.Id === assignment.Id);
       const assignmentAverage = assignmentGrades.length > 0 ?
-        assignmentGrades.reduce((gSum, grade) => gSum + grade.score, 0) / assignmentGrades.length :
+        assignmentGrades.reduce((gSum, grade) => gSum + grade.Score_c, 0) / assignmentGrades.length :
         0;
-      return sum + (assignmentAverage / assignment.points) * 100;
+      return sum + (assignmentAverage / assignment.Points_c) * 100;
     }, 0) / assignments.length : 0;
 
   // Recent activity
   const recentGrades = grades
-    .sort((a, b) => new Date(b.submittedDate) - new Date(a.submittedDate))
+    .sort((a, b) => new Date(b.SubmittedDate_c) - new Date(a.SubmittedDate_c))
     .slice(0, 5)
     .map(grade => {
-      const student = students.find(s => s.Id === grade.studentId);
-      const assignment = assignments.find(a => a.Id === grade.assignmentId);
+      const student = students.find(s => s.Id === grade.Student_c?.Id);
+      const assignment = assignments.find(a => a.Id === grade.Assignment_c?.Id);
       return { ...grade, student, assignment };
     });
 
@@ -152,29 +152,29 @@ const Dashboard = () => {
             {recentGrades.length === 0 ? (
               <p className="text-gray-500 text-center py-8">No recent grades to display</p>
             ) : (
-              recentGrades.map((grade) => (
-                <div key={grade.Id} className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200 transition-all">
-                  <div className="flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold text-xs mr-3">
-                      {grade.student?.firstName?.[0]}{grade.student?.lastName?.[0]}
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">
-                        {grade.student?.firstName} {grade.student?.lastName}
-                      </p>
-                      <p className="text-sm text-gray-500">{grade.assignment?.title}</p>
-                    </div>
+recentGrades.map((grade) => (
+              <div key={grade.Id} className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-100 hover:to-gray-200 transition-all">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold text-xs mr-3">
+                    {grade.student?.FirstName_c?.[0]}{grade.student?.LastName_c?.[0]}
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-gray-900">
-                      {grade.score}/{grade.assignment?.points}
+                  <div>
+                    <p className="font-medium text-gray-900">
+                      {grade.student?.FirstName_c} {grade.student?.LastName_c}
                     </p>
-                    <p className="text-sm text-gray-500">
-                      {Math.round((grade.score / grade.assignment?.points) * 100)}%
-                    </p>
+                    <p className="text-sm text-gray-500">{grade.assignment?.Title_c}</p>
                   </div>
                 </div>
-              ))
+                <div className="text-right">
+                  <p className="font-semibold text-gray-900">
+                    {grade.Score_c}/{grade.assignment?.Points_c}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {Math.round((grade.Score_c / grade.assignment?.Points_c) * 100)}%
+                  </p>
+                </div>
+              </div>
+            ))
             )}
           </div>
         </Card>
@@ -224,20 +224,20 @@ const Dashboard = () => {
             <div className="text-sm text-green-600">Present</div>
           </div>
           <div className="text-center p-4 bg-gradient-to-r from-red-50 to-red-100 rounded-lg">
-            <div className="text-2xl font-bold text-red-700">
-              {todayAttendance.filter(a => a.status === "absent").length}
-            </div>
-            <div className="text-sm text-red-600">Absent</div>
+<div className="text-2xl font-bold text-red-700">
+            {todayAttendance.filter(a => a.Status_c === "absent").length}
           </div>
-          <div className="text-center p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg">
-            <div className="text-2xl font-bold text-yellow-700">
-              {todayAttendance.filter(a => a.status === "late").length}
-            </div>
-            <div className="text-sm text-yellow-600">Late</div>
+          <div className="text-sm text-red-600">Absent</div>
+        </div>
+        <div className="text-center p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg">
+          <div className="text-2xl font-bold text-yellow-700">
+            {todayAttendance.filter(a => a.Status_c === "late").length}
           </div>
-          <div className="text-center p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg">
-            <div className="text-2xl font-bold text-blue-700">
-              {todayAttendance.filter(a => a.status === "excused").length}
+          <div className="text-sm text-yellow-600">Late</div>
+        </div>
+        <div className="text-center p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg">
+          <div className="text-2xl font-bold text-blue-700">
+            {todayAttendance.filter(a => a.Status_c === "excused").length}
             </div>
             <div className="text-sm text-blue-600">Excused</div>
           </div>

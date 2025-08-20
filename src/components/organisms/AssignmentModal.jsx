@@ -12,11 +12,14 @@ const AssignmentModal = ({ isOpen, onClose, onSave, assignment }) => {
     weight: ""
   });
 
-  useEffect(() => {
+useEffect(() => {
     if (assignment) {
       setFormData({
-        ...assignment,
-        dueDate: assignment.dueDate ? assignment.dueDate.split('T')[0] : ""
+        title: assignment.Title_c || "",
+        category: assignment.Category_c || "",
+        points: assignment.Points_c || "",
+        weight: assignment.Weight_c || "",
+        dueDate: assignment.DueDate_c ? assignment.DueDate_c.split('T')[0] : ""
       });
     } else {
       setFormData({

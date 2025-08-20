@@ -63,17 +63,17 @@ const StudentTable = ({ students, onEdit, onDelete }) => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {sortedStudents.map((student) => (
-              <tr key={student.Id} className="hover:bg-gray-50 transition-colors duration-150">
-                <td className="px-6 py-4">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
-                      {student.firstName[0]}{student.lastName[0]}
+{sortedStudents.map((student) => (
+            <tr key={student.Id} className="hover:bg-gray-50 transition-colors duration-150">
+              <td className="px-6 py-4">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                    {student.FirstName_c?.[0]}{student.LastName_c?.[0]}
+                  </div>
+                  <div className="ml-4">
+                    <div className="font-semibold text-gray-900">
+                      {student.FirstName_c} {student.LastName_c}
                     </div>
-                    <div className="ml-4">
-                      <div className="font-semibold text-gray-900">
-                        {student.firstName} {student.lastName}
-                      </div>
                     </div>
                   </div>
                 </td>
