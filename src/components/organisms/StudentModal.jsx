@@ -4,12 +4,13 @@ import FormField from "@/components/molecules/FormField";
 import ApperIcon from "@/components/ApperIcon";
 
 const StudentModal = ({ isOpen, onClose, onSave, student }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
     studentId: "",
-    grade: ""
+    grade: "",
+    marks: ""
   });
 
 useEffect(() => {
@@ -19,7 +20,8 @@ useEffect(() => {
         lastName: student.LastName_c || "",
         email: student.Email_c || "",
         studentId: student.StudentId_c || "",
-        grade: student.GradeLevel_c || ""
+        grade: student.GradeLevel_c || "",
+        marks: student.marks_c || ""
       });
     } else {
       setFormData({
@@ -27,7 +29,8 @@ useEffect(() => {
         lastName: "",
         email: "",
         studentId: "",
-        grade: ""
+        grade: "",
+        marks: ""
       });
     }
   }, [student, isOpen]);
@@ -89,7 +92,7 @@ useEffect(() => {
             required
           />
 
-          <FormField
+<FormField
             label="Grade Level"
             type="select"
             value={formData.grade}
@@ -103,6 +106,16 @@ useEffect(() => {
             required
           />
 
+          <FormField
+            label="Marks"
+            type="number"
+            step="0.01"
+            min="0"
+            max="100"
+            value={formData.marks}
+            onChange={handleChange("marks")}
+            placeholder="Enter marks (0-100)"
+          />
           <div className="flex justify-end gap-3 pt-4">
             <Button type="button" variant="ghost" onClick={onClose}>
               Cancel

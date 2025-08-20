@@ -10,13 +10,14 @@ export const studentService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "FirstName_c" } },
           { field: { Name: "LastName_c" } },
           { field: { Name: "Email_c" } },
           { field: { Name: "StudentId_c" } },
           { field: { Name: "GradeLevel_c" } },
-          { field: { Name: "PhotoUrl_c" } }
+          { field: { Name: "PhotoUrl_c" } },
+          { field: { Name: "marks_c" } }
         ]
       };
 
@@ -48,13 +49,14 @@ export const studentService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "FirstName_c" } },
           { field: { Name: "LastName_c" } },
           { field: { Name: "Email_c" } },
           { field: { Name: "StudentId_c" } },
           { field: { Name: "GradeLevel_c" } },
-          { field: { Name: "PhotoUrl_c" } }
+          { field: { Name: "PhotoUrl_c" } },
+          { field: { Name: "marks_c" } }
         ]
       };
 
@@ -86,13 +88,14 @@ export const studentService = {
       });
 
       const params = {
-        records: [{
+records: [{
           FirstName_c: studentData.firstName || studentData.FirstName_c,
           LastName_c: studentData.lastName || studentData.LastName_c,
           Email_c: studentData.email || studentData.Email_c,
           StudentId_c: studentData.studentId || studentData.StudentId_c,
           GradeLevel_c: studentData.grade || studentData.GradeLevel_c,
-          PhotoUrl_c: `https://api.dicebear.com/7.x/initials/svg?seed=${(studentData.firstName || studentData.FirstName_c)}${(studentData.lastName || studentData.LastName_c)}`
+          PhotoUrl_c: `https://api.dicebear.com/7.x/initials/svg?seed=${(studentData.firstName || studentData.FirstName_c)}${(studentData.lastName || studentData.LastName_c)}`,
+          marks_c: parseFloat(studentData.marks) || 0
         }]
       };
 
@@ -141,12 +144,13 @@ export const studentService = {
 
       const params = {
         records: [{
-          Id: id,
+Id: id,
           FirstName_c: studentData.firstName || studentData.FirstName_c,
           LastName_c: studentData.lastName || studentData.LastName_c,
           Email_c: studentData.email || studentData.Email_c,
           StudentId_c: studentData.studentId || studentData.StudentId_c,
-          GradeLevel_c: studentData.grade || studentData.GradeLevel_c
+          GradeLevel_c: studentData.grade || studentData.GradeLevel_c,
+          marks_c: parseFloat(studentData.marks) || 0
         }]
       };
 
