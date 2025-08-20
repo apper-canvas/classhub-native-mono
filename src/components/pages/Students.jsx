@@ -38,11 +38,11 @@ const Students = () => {
     loadStudents();
   }, []);
 
-  useEffect(() => {
+useEffect(() => {
 const filtered = students.filter(student => 
-      `${student.FirstName_c} ${student.LastName_c}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.StudentId_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.Email_c?.toLowerCase().includes(searchTerm.toLowerCase())
+      `${student.first_name_c} ${student.last_name_c}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.student_id_c?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.email_c?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredStudents(filtered);
   }, [searchTerm, students]);
